@@ -49,9 +49,11 @@ hist(StepsByDay$TotalSteps,
 ```
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
+
 It shows that the range between 10K-11K and below 1K are most frequent. The maximum number of steps taken in a day is between 21K-22K. 
 
 Now let us find out the mean and median total number of steps taken per day:
+
 
 ```r
 mean(StepsByDay$TotalSteps)
@@ -72,6 +74,7 @@ median(StepsByDay$TotalSteps)
 
 ### 4. What is the average daily activity pattern?
 To draw time series plot of the 5-minute interval and the average number of steps taken, averaged across all days, we need to process the data and get the average number of steps taken for each 5-minute interval.
+
 
 ```r
 StepsByInterval <- aggregate(rawData$steps, 
@@ -103,6 +106,7 @@ text(IntervalWithMaxStep$interval,
 ```
 
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
+
 The interval with the maximum number of steps is on interval 835 with approximate 206 steps.
 
 ### 5. Imputing missing values
@@ -134,6 +138,7 @@ names(NAbyDay) <- c("date", "NoOfNA")
 
 The days with missing values are :
 
+
 ```r
 NAbyDay[NAbyDay$NoOfNA > 0,]
 ```
@@ -151,6 +156,7 @@ NAbyDay[NAbyDay$NoOfNA > 0,]
 ```
 
 Since the total number of intervals in a day is 288(60*24/5), it means there is no data collected for the 8 days at all. So using the mean/median value of the day to replace the missing value is out of the question. I will use the mean for that 5-minute interval to fill in the missing value. 
+
 
 ```r
 imputedData <- merge(x = rawData, y = StepsByInterval, by = "interval", all.x=TRUE)
@@ -197,6 +203,7 @@ Let us create a new factor variable in the dataset with two levels – “weekda
 and “weekend” indicating whether a given date is a weekday or weekend
 day. The processed data are: 
 
+
 ```r
 imputedData$DayType[weekdays(imputedData$date) %in% c("Saturday", "Sunday")] <- "weekend"
 imputedData$DayType[is.na(imputedData$DayType)] <- "weekday"
@@ -238,13 +245,13 @@ ggplot(StepsByIntervalDayType,
 
 It shows the max average steps per interval is higher on weekdays than on weekends. But after the peak, weekends have higher steps, in most intervals, during the time between 10AM to 8PM.
 
+
 ```r
 ggplot(StepsByIntervalDayType, 
        aes(x = interval, 
            y = AverageSteps,
            group = DayType,
            color = DayType)) +
-    ylim(c(0, max(StepsByIntervalDayType$AverageSteps) * 1.1)) +
     geom_line() +
     xlab("Interval") +
     ylab("Average Number of Steps") +

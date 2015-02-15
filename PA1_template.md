@@ -1,4 +1,9 @@
-# Reproducible Research: Peer Assessment 1
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: true
+---
 ### 1. Introduction
 It is now possible to collect a large amount of data about personal movement using activity monitoring devices such as a Fitbit, Nike Fuelband, or Jawbone Up. These type of devices are part of the "quantified self" movement -- a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. But these data remain under-utilized both because the raw data are hard to obtain and there is a lack of statistical methods and software for processing and interpreting the data.
 
@@ -43,7 +48,7 @@ hist(StepsByDay$TotalSteps,
      xlab = "Number of Steps")
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-2-1.png) 
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png) 
 It shows that the range between 10K-11K and below 1K are most frequent. The maximum number of steps taken in a day is between 21K-22K. 
 
 Now let us find out the mean and median total number of steps taken per day:
@@ -97,7 +102,7 @@ text(IntervalWithMaxStep$interval,
      )
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-4-1.png) 
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png) 
 The interval with the maximum number of steps is on interval 835 with approximate 206 steps.
 
 ### 5. Imputing missing values
@@ -166,7 +171,7 @@ hist(imputedStepsByDay$TotalSteps,
      xlab = "Number of Steps")
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-8-1.png) 
+![plot of chunk unnamed-chunk-8](figure/unnamed-chunk-8-1.png) 
 
 After imputing, the range 10K-11K still is the most frequent. The mean and median total number of steps taken per day has increased, as expected, since the missing values are replaced with values that are larger than 0. Interestingly, the mean and median are the same.
 
@@ -229,7 +234,7 @@ ggplot(StepsByIntervalDayType,
     ggtitle("Average Number of Steps by Day Type") 
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-11-1.png) 
+![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png) 
 
 It shows the max average steps per interval is higher on weekdays than on weekends. But after the peak, weekends have higher steps, in most intervals, during the time between 10AM to 8PM.
 
@@ -246,7 +251,7 @@ ggplot(StepsByIntervalDayType,
     ggtitle("Average Number of Steps by Day Type") 
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
+![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png) 
 
 
 
